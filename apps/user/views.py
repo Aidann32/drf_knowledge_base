@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 from eth_utils import is_checksum_address
 from .serializers import UserRegistrationSerializer
 from rest_framework.response import Response
@@ -13,6 +14,8 @@ from django.contrib.auth.hashers import make_password
 
 
 class UserRegistrationAPIView(APIView):
+    permission_classes = [AllowAny]
+
     def post(self, request, *args, **kwargs):
         wallet_address = request.data.get('wallet_address')
         if wallet_address:
